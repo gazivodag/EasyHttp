@@ -36,6 +36,8 @@ dependencies {
     testImplementation("com.squareup.okhttp3:okhttp:4.11.0")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10.1")
+    // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+    implementation("commons-fileupload:commons-fileupload:1.5")
 }
 
 tasks.getByName<Test>("test") {

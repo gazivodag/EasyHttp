@@ -1,5 +1,6 @@
 package com.driftkiller;
 
+@SuppressWarnings("unused")
 public enum ContentType {
     TEXT_PLAIN("text/plain"),
     TEXT_HTML("text/html"),
@@ -24,5 +25,13 @@ public enum ContentType {
 
     public String getValue() {
         return value;
+    }
+
+    public static ContentType fromMime(String mime)
+    {
+        for (ContentType contentType : ContentType.values())
+            if (contentType.getValue().equals(mime))
+                return contentType;
+        return null;
     }
 }

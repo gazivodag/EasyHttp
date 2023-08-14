@@ -42,6 +42,12 @@ public class EasyHttpInteraction {
         exchange.getResponseHeaders().set("Content-Type", contentType.getValue());
     }
 
+    public ContentType getFirstContentType() //this may potentially introduce side effects
+    {
+        String firstBlock = exchange.getRequestHeaders().getFirst("Content-Type");
+        return ContentType.fromMime(firstBlock.split(";")[0]);
+    }
+
     public void json(Object serializableObject) throws IOException {
         json(serializableObject, 200);
     }
