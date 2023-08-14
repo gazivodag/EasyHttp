@@ -33,6 +33,8 @@ public class EasyHttpServer {
                 Method[] methods = Arrays.stream(routeClass.getDeclaredMethods())
                         .filter(m -> Modifier.isStatic(m.getModifiers()))
                         .filter(m -> m.isAnnotationPresent(EasyRoute.class))
+                        .filter(m -> m.getParameterCount() == 1)
+                        .filter(m -> m.getParameterTypes()[0] == EasyHttpInteraction.class)
                         .toArray(Method[]::new);
 
                 for (Method method : methods) {
