@@ -11,11 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor
+@SuppressWarnings("unused")
 public class EasyHttpInteraction {
 
     private HttpExchange exchange;
 
-    public Map<String, String> getBodyJson() throws IOException {
+    public Map<String, Object> getBodyJson() throws IOException {
         // Get the input stream from HttpExchange.getBody()
         InputStream inputStream = exchange.getRequestBody();
 
@@ -28,12 +29,12 @@ public class EasyHttpInteraction {
         }
         String jsonString = stringBuilder.toString();
 
-        // Create Type for Gson to parse the JSON into a Map<String, String>
-        Type type = new TypeToken<Map<String, String>>() {
+        // Create Type for Gson to parse the JSON into a Map<String, Object>
+        Type type = new TypeToken<Map<String, Object>>() {
         }.getType();
 
         // Parse the JSON string into a Map<String, String> using Gson
-        Map<String, String> jsonMap = EasyHttpServer.GSON.fromJson(jsonString, type);
+        Map<String, Object> jsonMap = EasyHttpServer.GSON.fromJson(jsonString, type);
         return jsonMap == null ? new HashMap<>() : jsonMap;
     }
 
@@ -61,6 +62,17 @@ public class EasyHttpInteraction {
         OutputStream outputStream = exchange.getResponseBody();
         outputStream.write(message.getBytes(StandardCharsets.UTF_8));
         outputStream.close();
+    }
+
+    public void sendAttachment(byte[] bytes, ContentType contentType, String filename) throws IOException {
+        setContentType(contentType);
+        exchange.getResponseHeaders().add("Content-Disposition", "attachment; filename=" + filename);
+        exchange.sendResponseHeaders(200, bytes.length);
+
+        try (OutputStream os = exchange.getResponseBody()) {
+            os.write(bytes);
+        }
+        exchange.close();
     }
 
 

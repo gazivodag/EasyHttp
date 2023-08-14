@@ -33,7 +33,7 @@ public class TestRoutes {
 
     @EasyRoute(path = "/echobody", httpMethodType = HttpMethodType.POST)
     public static void echoBodyRoute(EasyHttpInteraction interaction) throws IOException {
-        Map<String, String> body = interaction.getBodyJson();
+        Map<String, Object> body = interaction.getBodyJson();
         interaction.json(body);
     }
 

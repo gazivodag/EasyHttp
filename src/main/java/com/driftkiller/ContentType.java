@@ -8,6 +8,7 @@ public enum ContentType {
     APPLICATION_JSON("application/json"),
     APPLICATION_XML("application/xml"),
     APPLICATION_PDF("application/pdf"),
+    APPLICATION_DOCX("application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
     IMAGE_JPEG("image/jpeg"),
     IMAGE_PNG("image/png"),
     IMAGE_GIF("image/gif"),

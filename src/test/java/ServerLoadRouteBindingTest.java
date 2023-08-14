@@ -38,10 +38,13 @@ public class ServerLoadRouteBindingTest {
         System.out.println("Response from server after visiting /serializetest: " + serializeRouteResponse.body().string());
 
         //make a post request to /echobody
-        Map<String, String> mapToSerialize = new HashMap<>() {{
+        Map<String, Object> mapToSerialize = new HashMap<>() {{
             put("key1", "value1");
             put("key2", "value2");
             put("key3", "value3");
+            put("intkey1", Integer.MAX_VALUE);
+            put("floatkey2", Float.MAX_VALUE);
+            put("longkey1", Long.MAX_VALUE);
         }};
         String serializedMap = EasyHttpServer.GSON.toJson(mapToSerialize, Map.class);
         RequestBody echoRequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), serializedMap);
