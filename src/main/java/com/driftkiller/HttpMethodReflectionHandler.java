@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.lang.invoke.*;
 import java.lang.reflect.Method;
 
-public class HttpMethodReflectionHandler implements HttpHandler {
+class HttpMethodReflectionHandler implements HttpHandler {
     private Method methodRoute;
     private HttpExchangeMethod lambda = null;
 

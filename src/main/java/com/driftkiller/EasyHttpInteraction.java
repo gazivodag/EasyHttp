@@ -3,12 +3,18 @@ package com.driftkiller;
 import com.google.gson.reflect.TypeToken;
 import com.sun.net.httpserver.HttpExchange;
 import lombok.AllArgsConstructor;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @SuppressWarnings("unused")
@@ -133,6 +139,21 @@ public class EasyHttpInteraction {
             os.write(bytes);
         }
         exchange.close();
+    }
+
+    /**
+     * Retrieves a list of FormDataItems from a multipart/form-data HTTP request.
+     * This method uses `DiskFileItemFactory` and `ServletFileUpload` classes
+     * from Apache Commons FileUpload library to parse the request and extract the file items.
+     *
+     * @return a list of FormDataItems representing the file items in the request
+     * @throws Exception if an error occurs while parsing the request or creating FormDataItems
+     */
+    public List<FormDataItem> getMultipartItems() throws Exception {
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        List<FileItem> items = upload.parseRequest(new HttpExchangeRequestContext(exchange));
+        return items.stream().map(FormDataItem::new).collect(Collectors.toList());
     }
 
 
