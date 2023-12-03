@@ -1,6 +1,6 @@
 package com.driftkiller;
 
 @FunctionalInterface
-interface HttpExchangeMethod {
-    void run(EasyHttpInteraction exchange);
+public interface HttpExchangeMethod {
+    void run(EasyHttpInteraction interaction);
 }

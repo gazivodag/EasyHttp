@@ -117,9 +117,10 @@ public class EasyHttpInteraction {
      */
     public void send(String message, int code) throws IOException {
         exchange.sendResponseHeaders(code, message.length());
-        OutputStream outputStream = exchange.getResponseBody();
-        outputStream.write(message.getBytes(StandardCharsets.UTF_8));
-        outputStream.close();
+        try (OutputStream outputStream = exchange.getResponseBody()) {
+            outputStream.write(message.getBytes(StandardCharsets.UTF_8));
+        }
+        exchange.close();
     }
 
     /**

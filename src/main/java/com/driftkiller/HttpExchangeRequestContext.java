@@ -6,7 +6,7 @@ import org.apache.commons.fileupload.RequestContext;
 import java.io.IOException;
 import java.io.InputStream;
 
-class HttpExchangeRequestContext implements RequestContext {
+public class HttpExchangeRequestContext implements RequestContext {
     private final HttpExchange exchange;
 
     public HttpExchangeRequestContext(HttpExchange exchange) {
