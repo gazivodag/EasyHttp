@@ -1,5 +1,10 @@
 package com.driftkiller;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 @SuppressWarnings("unused")
 public enum ContentType {
     TEXT_PLAIN("text/plain"),
@@ -18,14 +23,6 @@ public enum ContentType {
     MULTIPART_FORM_DATA("multipart/form-data");
 
     private final String value;
-
-    ContentType(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
 
     public static ContentType fromMime(String mime)
     {
